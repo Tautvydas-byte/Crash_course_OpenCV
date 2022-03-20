@@ -57,7 +57,7 @@ while camera.isOpened():
 		(x, y, w, h) = bounding_boxe  # coordinates
 		# print(x,y,w,h)
 		class_name = classes[class_id]
-		if class_name == "person":
+		if class_name == "person" and button_person is True:
 			cv2.putText(frame, str(class_name), (x, y - 10), cv2.FONT_HERSHEY_PLAIN, 1, (200, 0, 50), 2)
 			cv2.rectangle(frame, (x, y), (x + w, y + w), (200, 0, 50), 3)
 
