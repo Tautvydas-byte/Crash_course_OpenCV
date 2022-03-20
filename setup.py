@@ -5,3 +5,4 @@ setup(name="Yolo4_tiny_detection",
 	  description="Software detects objects in realtime",
 	  executables=[Executable("main.py")]
 	  )
+#dnn_model failas turi buti ikeltas i exe.win-amd64-3.9 folderi
