@@ -3,7 +3,7 @@ import cv2
 # Opencv DNN(deep neural network)
 net = cv2.dnn.readNet("dnn_model/yolov4-tiny.weights", "dnn_model/yolov4-tiny.cfg")  # yolov4 loaded
 model = cv2.dnn_DetectionModel(net)
-model.setInputParams(size=(320, 320), scale=1 / 255)
+model.setInputParams(size=(320, 320), scale=1 / 255) #kokios rezuliucijos nuotrauka bus pateikta modeliui
 # -------------------------------------
 # Load class lists
 classes = []
@@ -16,6 +16,8 @@ print(f"Object classes = {classes}")
 # Initiliaze camera
 camera_port = 0  # 0-first webcam (myPC), 1-second-webcam,2-third and so on
 camera = cv2.VideoCapture(camera_port, cv2.CAP_DSHOW)  # cap
+camera.set(cv2.CAP_PROP_FRAME_WIDTH,1280)#pacios naudojamos kameros rezoliucija
+camera.set(cv2.CAP_PROP_FRAME_HEIGHT,720)
 
 while camera.isOpened():
 	# Get frames
