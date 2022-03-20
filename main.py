@@ -13,22 +13,31 @@ with open("dnn_model/classes.txt", "r") as file_object:
 		class_name = class_name.strip()
 		classes.append(class_name)
 print(f"Object classes = {classes}")
+
+
 # ------------------------------------
 # Initiliaze camera
 camera_port = 0  # 0-first webcam (myPC), 1-second-webcam,2-third and so on
 camera = cv2.VideoCapture(camera_port, cv2.CAP_DSHOW)  # cap
 camera.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)  # pacios naudojamos kameros rezoliucija
 camera.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
-
-
+#-----------------------------
+button_person = False
 # ----Create window-----------
 def click_button(event, x, y, flags, params):
+	global button_person
 	if event == cv2.EVENT_LBUTTONDOWN:
 		print(x, y)
 		polygon = np.array([[(20, 20), (220, 20), (220, 70), (20, 70)]])
 		is_inside = cv2.pointPolygonTest(polygon,(x,y),False)#tikrina ar pele patenka ant kvadrato
 		if is_inside>0:
 			print(f"We are clicking inside the button {x,y}")
+
+			if button_person is False:
+				button_person = True
+			else:
+				button_person = False
+			print(f"Now button person is {button_person}")
 
 
 
