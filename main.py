@@ -1,4 +1,5 @@
 import cv2
+import numpy as np
 
 # Opencv DNN(deep neural network)
 net = cv2.dnn.readNet("dnn_model/yolov4-tiny.weights", "dnn_model/yolov4-tiny.cfg")  # yolov4 loaded
@@ -24,6 +25,11 @@ camera.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
 def click_button(event, x, y, flags, params):
 	if event == cv2.EVENT_LBUTTONDOWN:
 		print(x, y)
+		polygon = np.array([[(20, 20), (220, 20), (220, 70), (20, 70)]])
+		is_inside = cv2.pointPolygonTest(polygon,(x,y),False)#tikrina ar pele patenka ant kvadrato
+		if is_inside>0:
+			print(f"We are clicking inside the button {x,y}")
+
 
 
 cv2.namedWindow("Frame")
@@ -48,7 +54,10 @@ while camera.isOpened():
 
 #---------------------------
 #Create the button
-	cv2.rectangle(frame,(20,20),(150,70),(0,0,200),-1)
+	# cv2.rectangle(frame,(20,20),(220,70),(0,0,200),-1)
+	polygon = np.array([[(20,20),(220,20),(220,70),(20,70)]])
+	cv2.fillPoly(frame,polygon,(0,0,200))
+	cv2.putText(frame,"Person",(30,60),cv2.FONT_HERSHEY_PLAIN,3,(255,255,255),3)
 
 
 	cv2.imshow("Frame", frame)
